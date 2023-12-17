@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 from dotenv import load_dotenv
 import os
+from datetime import timedelta
 
 load_dotenv()  # take environment variables from .env.
 
@@ -44,6 +45,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework_simplejwt",
     "apps.authentication",
+    "apps.students",
 ]
 
 MIDDLEWARE = [
@@ -68,8 +70,11 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
     "TOKEN_OBTAIN_SERIALIZER": "apps.authentication.token_claims.TokenWithCustomClaimsSerializer",
 }
+
+APPEND_SLASH = False
 
 TEMPLATES = [
     {
